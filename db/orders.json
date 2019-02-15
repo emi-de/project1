@@ -1,0 +1,24 @@
+{
+  "orders": [
+    {
+      "number": "123",
+      "price": "123,00",
+      "payment": "payU",
+      "id": 1,
+      "{\"products\":{\"productName\":\"222\",\"productPrice\":\"444\"}}": ""
+    },
+    {
+      "number": "124",
+      "price": "220,00",
+      "payment": "pobranie-dpd",
+      "id": 2
+    },
+    {
+      "number": "125",
+      "price": "550,00",
+      "payment": "przelew",
+      "id": 3
+    }
+  ],
+  "products": []
+}

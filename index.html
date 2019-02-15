@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div class="container">
+
+    <form>
+        <label>Numer zamówienia:</label>
+    <input type="text" id="new-order_number">
+    <label>Kwota:</label>
+    <input type="text" id="new-order_price">
+    <select id="new-order_payment" name="payment">
+        <option value="">wybierz</option>
+        <option value="payU">payU</option>
+        <option value="przelew">przelew</option>
+        <option value="pobranie-dpd">pobranie-dpd</option>
+        <option value="pobranie-poczta">pobranie-poczta</option>
+        <option value="pobranie-inpost">pobranie-inpost</option>
+        <option value="płatność w sklepie">płatność w sklepie</option>
+    </select>
+    </form>
+    <button class="add-item_button"> dodaj zamówienie </button>
+
+    <div class="order-list">
+    </div>
+
+</div>
+<script src="http://code.jquery.com/jquery-2.2.1.min.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
