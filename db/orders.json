@@ -3,9 +3,8 @@
     {
       "number": "123",
       "price": "123,00",
-      "payment": "payU",
-      "id": 1,
-      "{\"products\":{\"productName\":\"222\",\"productPrice\":\"444\"}}": ""
+      "payment": "przelew",
+      "id": 1
     },
     {
       "number": "124",
@@ -18,7 +17,35 @@
       "price": "550,00",
       "payment": "przelew",
       "id": 3
+    },
+    {
+      "number": "126",
+      "price": "65,00",
+      "payment": "payU",
+      "id": 4
     }
   ],
-  "products": []
+  "products": [
+    {
+      "productName": "produkt 1",
+      "productPrice": "59,00",
+      "orderId": "1",
+      "checked": "",
+      "id": 1
+    },
+    {
+      "productName": "product 2",
+      "productPrice": "64,00",
+      "orderId": "1",
+      "checked": "",
+      "id": 2
+    },
+    {
+      "productName": "produkt 1",
+      "productPrice": "99,00",
+      "orderId": "2",
+      "checked": "",
+      "id": 3
+    }
+  ]
 }

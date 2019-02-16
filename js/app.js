@@ -5,7 +5,7 @@ const $list = $('.order-list');
 const $addItemButton = $('.add-item_button');
 
 
-function createOrder() {
+const createOrder = () => {
 
     $addItemButton.on('click', function(){
 
@@ -17,7 +17,6 @@ function createOrder() {
             number: $newNumber.val(),
             price: $newPrice.val(),
             payment: $newPayment.val(),
-            products:""
         }
 
         $.ajax({
@@ -33,14 +32,13 @@ function createOrder() {
 };
 
 
-function showOrders() {
+const showOrders = () => {
 
         $.ajax({
             url: url + '/orders',
             method: 'GET'
         }).done(function(response) {
-            
-        
+             
         for (let i = 0; i < response.length; i++) {
                 
             let $newOrderItem  = $('<div class="order-item"></div>');
@@ -58,20 +56,54 @@ function showOrders() {
             $orderInfo.append('<button class="order-delete">usuń</button>');
             $newOrderItem.append($orderNumberBtn);
             $newOrderItem.append($orderInfo);
+
             let $orderDetails = $('<div class="order-details"></div>');
             $newOrderItem.append($orderDetails);      
+
             let $createProduct = $('<div class="add-product_form"></div>');
             $createProduct.append('<input type="text" class="add-product_name">');
             $createProduct.append('<input type="text" class="add-product_price">');
             $createProduct.append('<button class="add-product_button">Dodaj</button>');
             $orderDetails.append($createProduct);
             $list.append($newOrderItem);
-            $createProduct.hide();
-            
-        }
-
-       
+            $orderDetails.hide();
+        }      
     });
+    
+}
+
+const showProducts = () => {
+
+        $.ajax({
+            url: url + '/products',
+            method: 'GET',
+            dataType: 'JSON'
+        }).done(function(response) {
+        
+            response.forEach(function(element){
+
+                let $orderItems = $('.order-item');
+               
+
+                for (let i = 0; i < $orderItems.length; i++){
+
+                // let $orderId = $orderItems[i].data('id')
+
+                // if(element.orderId == $orderId){
+                      
+                //     let $orderDetails = element.find('.order-details');
+                //     let $productDetails = $('<div class="product-details"></div>')
+                //     $productDetails.append('<p class="product-name">'+ element.productName +'</p>');
+                //     $productDetails.append('<p class="product-price">'+ element.productPrice +'</p>');
+                //     $productDetails.append('<button class="product-rw">odłożone</button>');
+                //     $productDetails.append('<button class="product-return">zwrot</button>');
+                //     $productDetails.append('<button class="product-exchange">wymiana</button>');
+                //     $orderDetails.append($productDetails);
+                // }
+            }
+            })
+        })
+
 };
 
 
@@ -80,8 +112,8 @@ const editItem = () => {
     $list.on('click', 'button.order-edit', function(){
 
         let $thisParent = $(this).parent();
-        let $thisGrandparent = $(this).parents('.order-item');
-        let $orderId = $thisGrandparent.data('id');
+        let $thisOrderItem = $(this).parents('.order-item');
+        let $orderId = $thisOrderItem.data('id');
 
         $.ajax({
             url: url + '/orders' + "/" + $orderId,
@@ -125,16 +157,17 @@ const showDetails = () => {
 
     $list.on('click', 'button.order-number', function(){
 
+        
         let $parent = $(this).parent();
-        $parent.find('.add-product_form').show();
+        $parent.find('.order-details').show();
         $parent.find('.order-number').addClass('visible');
-           
+
     });
 
     $list.on('click', 'button.visible', function(){
 
         let $parent = $(this).parent();
-        $parent.find('.add-product_form').hide();
+        $parent.find('.order-details').hide();
         $parent.find('.order-number').removeClass('visible');
         
     });
@@ -151,31 +184,31 @@ const addProduct = () => {
         let $orderId = $this.parents('.order-item').data('id');
 
         let newProduct = {
-            products: {
             productName: $newProductName.val(),
-            productPrice: $newProductPrice.val()
-            }
+            productPrice: $newProductPrice.val(),
+            orderId: $orderId,
+            checked:""
         }
 
         $.ajax({
-            url: url + '/orders' + '/' + $orderId, 
-            method: 'PATCH',
-            data: JSON.stringify(newProduct),
+            url: url + '/products', 
+            method: 'POST',
+            data: newProduct,
             dataType: 'JSON'
         }).done(function(response){
- 
+            
         })
-
     });
 };
 
 
+
 createOrder();
 showOrders();
+showProducts();
 showDetails();
 editItem();
 addProduct();
-
 });
 
 
